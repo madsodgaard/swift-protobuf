@@ -86,6 +86,8 @@ struct SwiftProtobufPlugin {
             var implementationOnlyImports: Bool?
             /// Whether import statements should be preceded with visibility.
             var useAccessLevelOnImports: Bool?
+            /// Additional paths to look for imported protobuf files.
+            var additionalProtobufSearchPaths: [String]?
         }
 
         /// The path to the `protoc` binary.
@@ -163,7 +165,8 @@ struct SwiftProtobufPlugin {
         invocation: Configuration.Invocation,
         protocPath: Path,
         protocGenSwiftPath: Path,
-        outputDirectory: Path
+        outputDirectory: Path,
+        additional
     ) -> Command {
         // Construct the `protoc` arguments.
         var protocArgs = [
@@ -175,6 +178,12 @@ struct SwiftProtobufPlugin {
         // the proto files relative to it.
         protocArgs.append("-I")
         protocArgs.append("\(directory)")
+
+        // Add any additional search paths
+        for searchPath in invocation.additionalProtobufSearchPaths {
+            protocArgs.append("-I")
+            protocArgs.append("\(searchPath)")
+        }
 
         // Add the visibility if it was set
         if let visibility = invocation.visibility {
