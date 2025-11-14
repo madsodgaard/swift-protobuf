@@ -179,7 +179,7 @@ struct SwiftProtobufPlugin {
         protocArgs.append("\(directory)")
 
         // Add any additional search paths
-        for searchPath in invocation.additionalProtobufSearchPaths {
+        for searchPath in invocation.additionalProtobufSearchPaths ?? [] {
             protocArgs.append("-I")
             protocArgs.append("\(searchPath)")
         }
