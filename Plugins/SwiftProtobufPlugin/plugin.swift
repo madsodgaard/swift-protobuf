@@ -165,8 +165,7 @@ struct SwiftProtobufPlugin {
         invocation: Configuration.Invocation,
         protocPath: Path,
         protocGenSwiftPath: Path,
-        outputDirectory: Path,
-        additional
+        outputDirectory: Path
     ) -> Command {
         // Construct the `protoc` arguments.
         var protocArgs = [
