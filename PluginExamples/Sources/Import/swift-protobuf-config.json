@@ -4,8 +4,12 @@
             "protoFiles": [
                 "Bar/Bar.proto",
                 "Foo/Foo.proto",
+                "Main.proto"
             ],
-            "visibility": "public"
+            "visibility": "public",
+            "additionalProtobufSearchPaths": [
+                "Bar",
+            ]
         }
     ]
 }
